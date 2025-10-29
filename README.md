@@ -193,6 +193,8 @@ Erstelle:
 1. Einen eigenen Befehl, z. B. `\newcommand{\vect}[1]{\boldsymbol{#1}}` zur Darstellung von Vektoren  
 2. Eine eigene Umgebung, z. B. `theorem`, `definition` oder `example` mit `\newenvironment`
 
+![finales Bonusbeispiel](img/b05.png)
+
 💡 **Tipp:** Nutze `amsthm` für saubere Formatierung mathematischer Definitionen oder Sätze.
 
 ---
