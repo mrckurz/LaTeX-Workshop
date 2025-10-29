@@ -148,6 +148,8 @@ Erstelle ein Gleichungssystem mit Matrizen und Variablen:
 - Verwende die Umgebung `bmatrix` oder `pmatrix`
 - Zeige eine Systemdarstellung z. B. für lineare Gleichungen
 
+![Matrizen-Gleichungssystem](img/b01.png)
+
 💡 **Tipp:** Nutze `amsmath` für fortgeschrittene Umgebungen (`cases`, `align`, `bmatrix`).
 
 ---
