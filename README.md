@@ -247,11 +247,27 @@ Volumen einer Kugel & $V = \frac{4}{3}\pi r^3$ & $523.6$ \\
 ### 🔧 Bonusaufgabe 5 — Eigene Umgebung und Befehlsdefinition
 ```latex
 \documentclass{article}
-\usepackage{amsthm}
-\newtheorem{definition}{Definition}
+\usepackage{amsthm} % für theorem-ähnliche Umgebungen
+\usepackage{xcolor} % für farbige Boxen (optional)
+
+% ---- Eigener Befehl ----
+% Erzeugt fett gesetzte Vektoren mit \vect{x}
 \newcommand{\vect}[1]{\boldsymbol{#1}}
 
+% ---- Eigene Umgebung "beispiel" ----
+\newenvironment{beispiel}[1][Beispiel]{%
+  \par\vspace{1em}\noindent
+  \color{blue}\textbf{#1:}\itshape\par
+}{%
+  \vspace{0.5em}\normalcolor\normalfont\par
+}
+
+% ---- Alternativ: theorem-basierte Umgebung ----
+\newtheorem{definition}{Definition}
+
 \begin{document}
+
+\section*{Eigene Definition und Umgebung}
 
 \begin{definition}[Vektor]
 Ein \emph{Vektor} ist ein Element eines Vektorraums.
@@ -259,7 +275,16 @@ Ein \emph{Vektor} ist ein Element eines Vektorraums.
 
 Ein Beispiel für einen Vektor: $\vect{v} = (1,2,3)$.
 
+\begin{beispiel}[Vektoren im Raum]
+Sei $\vect{a} = (2,1,0)$ und $\vect{b} = (1,-1,3)$.
+Dann gilt:
+\[
+\vect{a} + \vect{b} = (3,0,3)
+\]
+\end{beispiel}
+
 \end{document}
+
 ```
 
 💡 **Tipp:** Mit `amsthm` lassen sich auch Umgebungen wie „Satz“ oder „Beweis“ leicht erstellen.
