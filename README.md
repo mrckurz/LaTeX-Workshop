@@ -1,4 +1,4 @@
-# 🧠 LaTeX Workshop
+# LaTeX Workshop
 
 Willkommen zum LaTeX-Workshop!  
 In diesem Repository findest du **Anleitungen**, **Übungsaufgaben**, **Tipps & Tricks** sowie **Troubleshooting-Hinweise** rund um LaTeX für wissenschaftliches Arbeiten und technische Dokumentation.
@@ -136,7 +136,3 @@ Im Text zitieren mit `\cite{lamport1994}`.
 | Mathe wird nicht zentriert | `\[ ... \]` statt `$ ... $` |
 
 ---
-
-## 📄 Lizenz
-Dieses Material steht unter CC BY-SA 4.0.  
-Erstellt von **Marc Kurz** (2025).
