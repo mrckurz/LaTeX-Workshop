@@ -205,6 +205,28 @@ So bleibt dein Projekt sauber strukturiert.
 
 ---
 
+## 🌐 Übersicht: Cloudbasierte LaTeX-Editoren
+
+Diese Tabelle bietet eine Übersicht über empfehlenswerte Online-Plattformen für LaTeX, die sich besonders für Studierende und Lehrveranstaltungen eignen.
+
+| Plattform | Kurzbeschreibung | Kostenmodell | Besonderheiten | URL |
+|-----------|------------------|---------------|----------------|-----|
+| **Overleaf** | Marktführender Cloud-LaTeX-Editor mit Echtzeit-Kollaboration, GitHub-Integration und zahlreichen Vorlagen. | Kostenlos (1 Kollaborateur) / Bezahlpläne für Teams und Hochschulen | Weit verbreitet, stabil, ideal für Lehre und Gruppenprojekte | [https://www.overleaf.com](https://www.overleaf.com) |
+| **Crixet** | Moderne Online-LaTeX-Plattform mit Kollaboration, KI-Unterstützung und Echtzeit-Bearbeitung. | Freemium | KI-Assistent („Chirp“), Geräte-übergreifend, Team-Features | [https://crixet.com](https://crixet.com) |
+| **Papeeria** | Online-LaTeX-Editor mit vollständig installierter TeX-Live-Umgebung, Mobile-Support und Git/Drive-Sync. | Freemium | Gute Kollaborationsfunktionen, einfache Nutzerführung | [https://papeeria.com](https://papeeria.com) |
+| **CoCalc** | Cloud-Rechner + LaTeX-Editor + Jupyter/Terminal auf Linux-Basis — geeignet für Lehre und Forschung. | Kostenlos (Basis) / Bezahlpläne | Vollständige Online-Umgebung mit Terminal-Zugriff | [https://cocalc.com](https://cocalc.com) |
+| **Verbosus** | Browserbasierter LaTeX-Editor ohne Installation, mit Syntax-Highlighting und Vorschau. | Kostenlos / Freemium | Sehr einfacher Einstieg, geringerer Funktionsumfang | [https://www.verbosus.com](https://www.verbosus.com) |
+| **Inscrive** | Neuer Online-LaTeX-Editor mit Fokus auf Kollaboration, Datenschutz und Performance. | Freemium | Modernes Tool-Design, aufstrebende Plattform | [https://inscrive.io](https://inscrive.io) |
+
+---
+
+📘 *Empfohlen für Workshops und Lehre:* **Overleaf** (Standard)  
+🧠 *Für erfahrene Anwender:* **Crixet** oder **CoCalc**  
+💡 *Einfache Alternativen:* **Papeeria**, **Verbosus**
+
+
+---
+
 ## 📄 Lizenz
 Dieses Material steht unter CC BY-SA 4.0.  
 Erstellt von **Marc Kurz** (2025).
