@@ -24,7 +24,7 @@ Gesamtzeit: **08:50–11:15 Uhr (inkl. 15 Min Pause)**
 - **Alternativ:**  
   - Installation von TeX Live oder MikTeX  
   - Editor: VS Code + *LaTeX Workshop*-Extension
-  - oder eine weitere [Cloud-basierte Alternative](#🌐-übersicht:-cloudbasierte-laTeX-Editoren)
+  - oder eine weitere [Cloud-basierte Alternative](#übersicht-cloudbasierte-latex-editoren)
 
 ### 2️⃣ Minimales Dokument
 ```latex
