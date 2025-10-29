@@ -159,6 +159,8 @@ Erstelle eine längere Herleitung mit der `align`-Umgebung:
 - Verwende mehrere Gleichungen mit `&` zur Ausrichtung
 - Nummeriere und referenziere Zwischenschritte
 
+![Mehrzeilige Gleichung](img/b02.png)
+
 💡 **Tipp:** Nutze `\label{}` und `\eqref{}` für Referenzen auf Gleichungen.
 
 ---
