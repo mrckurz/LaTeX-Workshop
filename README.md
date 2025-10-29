@@ -96,11 +96,13 @@ Erstelle eine Datei `literatur.bib`:
 ```
 und verwende:
 ```latex
-\usepackage[backend=biber,style=alphabetic]{biblatex}
+\usepackage[backend=biber,style=numeric]{biblatex}
 \addbibresource{literatur.bib}
 ```
 
 Im Text zitieren mit `\cite{lamport1994}`.
+
+Weitere 3 Quellen auf Google-Scholar suchen und einfügen.
 
 ---
 
