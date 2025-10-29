@@ -1,4 +1,4 @@
-# 🧠 LaTeX Workshop — Informatik (3. & 5. Semester)
+# 🧠 LaTeX Workshop
 
 Willkommen zum LaTeX-Workshop!  
 In diesem Repository findest du **Anleitungen**, **Übungsaufgaben**, **Tipps & Tricks** sowie **Troubleshooting-Hinweise** rund um LaTeX für wissenschaftliches Arbeiten und technische Dokumentation.
