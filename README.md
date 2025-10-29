@@ -182,6 +182,8 @@ Erstelle eine Tabelle mit gemischten Inhalten (Text und Formeln) und variabler S
 - Nutze `p{}`-Spalten, um Text umbrechen zu lassen
 - Setze Formeln in Zellen (`$...$` oder `\(...\)`)
 
+![Tabelle mit Formeln](img/b04.png)
+
 💡 **Tipp:** Probiere das Paket `array` für präzise Spaltenausrichtung.
 
 ---
