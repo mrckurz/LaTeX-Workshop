@@ -56,13 +56,8 @@ Nutze `\maketitle` für automatische Titelerstellung.
 
 ### 🧩 Aufgabe 2: Formeln
 Füge diese Formeln in dein Dokument ein:
-```latex
-E = mc^2
+![Mathematische Formeln](img/02.png)
 
-\[
-\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
-\]
-```
 
 ### 🧩 Aufgabe 3: Tabelle
 Erstelle eine 3x3-Tabelle mit Überschriften.
