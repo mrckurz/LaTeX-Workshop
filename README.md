@@ -56,6 +56,7 @@ Nutze `\maketitle` für automatische Titelerstellung.
 
 ### 🧩 Aufgabe 2: Formeln
 Füge diese Formeln in dein Dokument ein:
+
 ![Mathematische Formeln](img/02.png)
 
 
