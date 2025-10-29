@@ -61,7 +61,9 @@ Füge diese Formeln in dein Dokument ein:
 
 
 ### 🧩 Aufgabe 3: Tabelle
-Erstelle eine 3x3-Tabelle mit Überschriften.
+Erstelle eine 3x3-Tabelle mit Überschriften:
+
+![Tabelle in LaTeX](img/03.png)
 
 ### 🧩 Aufgabe 4: Abbildung
 Binde eine Grafik ein (z. B. `example-image`) mit Beschriftung und Referenz:
