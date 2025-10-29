@@ -136,3 +136,65 @@ Im Text zitieren mit `\cite{lamport1994}`.
 | Mathe wird nicht zentriert | `\[ ... \]` statt `$ ... $` |
 
 ---
+
+## 💎 Erweiterte Bonusaufgaben (für Fortgeschrittene)
+
+Diese Aufgaben richten sich an Studierende mit bereits solider LaTeX-Erfahrung. Sie fördern die Arbeit mit komplexeren Strukturen, Umgebungen und selbst definierten Befehlen.
+
+---
+
+### 🧮 **Bonusaufgabe 1 — Komplexe Formel mit Matrizen und Gleichungssystemen**
+Erstelle ein Gleichungssystem mit Matrizen und Variablen:
+- Verwende die Umgebung `bmatrix` oder `pmatrix`
+- Zeige eine Systemdarstellung z. B. für lineare Gleichungen
+
+💡 **Tipp:** Nutze `amsmath` für fortgeschrittene Umgebungen (`cases`, `align`, `bmatrix`).
+
+---
+
+### 🧮 **Bonusaufgabe 2 — Mehrzeilige und referenzierbare Formeln**
+Erstelle eine längere Herleitung mit der `align`-Umgebung:
+- Verwende mehrere Gleichungen mit `&` zur Ausrichtung
+- Nummeriere und referenziere Zwischenschritte
+
+💡 **Tipp:** Nutze `\label{}` und `\eqref{}` für Referenzen auf Gleichungen.
+
+---
+
+### 📊 **Bonusaufgabe 3 — Tabelle mit mehrzeiligen Überschriften und Zellen**
+Erstelle eine Tabelle mit:
+- Spaltenüberschriften über mehrere Zeilen (`multirow`)
+- Zusammengefassten Zellen (`multicolumn`)
+- Linienstruktur mit `booktabs`
+
+💡 **Tipp:** Verwende `\usepackage{multirow, booktabs}` und achte auf gute Lesbarkeit durch `\toprule`, `\midrule`, `\bottomrule`.
+
+---
+
+### 📊 **Bonusaufgabe 4 — Tabellen mit Berechnungen oder Textausrichtung**
+Erstelle eine Tabelle mit gemischten Inhalten (Text und Formeln) und variabler Spaltenbreite.
+- Nutze `p{}`-Spalten, um Text umbrechen zu lassen
+- Setze Formeln in Zellen (`$...$` oder `\(...\)`)
+
+💡 **Tipp:** Probiere das Paket `array` für präzise Spaltenausrichtung.
+
+---
+
+### 🔧 **Bonusaufgabe 5 — Eigene Umgebung oder Befehlsdefinition**
+Erstelle:
+1. Einen eigenen Befehl, z. B. `\newcommand{\vect}[1]{\boldsymbol{#1}}` zur Darstellung von Vektoren  
+2. Eine eigene Umgebung, z. B. `theorem`, `definition` oder `example` mit `\newenvironment`
+
+💡 **Tipp:** Nutze `amsthm` für saubere Formatierung mathematischer Definitionen oder Sätze.
+
+---
+
+## ✨ Empfehlung
+Speichere deine Lösungen als separate `.tex`-Dateien (z. B. `bonus1.tex`, `bonus2.tex`, …) und füge sie im Hauptdokument mit `\input{bonus1.tex}` hinzu.  
+So bleibt dein Projekt sauber strukturiert.
+
+---
+
+## 📄 Lizenz
+Dieses Material steht unter CC BY-SA 4.0.  
+Erstellt von **Marc Kurz** (2025).
