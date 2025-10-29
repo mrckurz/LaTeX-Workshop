@@ -171,6 +171,8 @@ Erstelle eine Tabelle mit:
 - Zusammengefassten Zellen (`multicolumn`)
 - Linienstruktur mit `booktabs`
 
+![komplizierte Tabelle](img/b03.png)
+
 💡 **Tipp:** Verwende `\usepackage{multirow, booktabs}` und achte auf gute Lesbarkeit durch `\toprule`, `\midrule`, `\bottomrule`.
 
 ---
