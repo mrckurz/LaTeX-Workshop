@@ -207,7 +207,7 @@ So bleibt dein Projekt sauber strukturiert.
 
 ## 🌐 Übersicht: Cloudbasierte LaTeX-Editoren
 
-Diese Tabelle bietet eine Übersicht über empfehlenswerte Online-Plattformen für LaTeX, die sich besonders für Studierende und Lehrveranstaltungen eignen.
+Diese Tabelle bietet eine Übersicht über empfehlenswerte Online-bzw. Cloud-Plattformen für LaTeX.
 
 | Plattform | Kurzbeschreibung | Kostenmodell | Besonderheiten | URL |
 |-----------|------------------|---------------|----------------|-----|
