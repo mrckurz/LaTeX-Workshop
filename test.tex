@@ -1,6 +1,98 @@
 \documentclass[a4paper,11pt]{article}
+\title{Mein erstes \LaTeX Dokument}
+\author{Marc Kurz}
+\date{\today}
+
 
 \begin{document}
+\maketitle
+
+\section{Einleitung}
 Hallo Welt! Dies ist mein erstes LaTeX-Dokument.
+Wie in Kapitel~\ref{sec:UUK2} beschrieben, ist \LaTeX sehr super.
+
+\section{Hauptteil}
+Hallo Welt! Dies ist mein erstes LaTeX-Dokument.
+
+\begin{itemize}
+    \item Item 1
+    \item Item 2
+    \begin{itemize}
+        \item Sub-Item 1
+        \item Sub-item 2
+        \begin{itemize}
+            \item Noch eine Ebene
+            \begin{itemize}
+                \item Noch eine Ebene
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+    \item Item 3
+    \begin{enumerate}
+        \item Nummer Aufzählungn 1
+        \item Aufzählung 2
+    \end{enumerate}
+\end{itemize}
+
+\begin{itemize}
+    \item[+] Super
+    \item[-] Nicht super
+\end{itemize}
+
+\subsection{Unterkapitel}
+Lorem ipsum
+
+\subsection{Noch ein Unterkapitel}
+Lorem Ipsum
+
+\subsubsection{Unter-Unter-Kapitel}
+Test
+
+\subsubsection{Unter-Unter-Kapitel Nr. 2}
+\label{sec:UUK2}
+Test
+
+\paragraph{Paragraph}
+Test
+
+\subparagraph{Subparagraph}
+Test
+
+\section{Mathematische Formeln}
+Die wohl bekannteste Formel:
+
+\begin{equation}
+    E = mc^2  
+\end{equation}
+
+Nochmals Einstein's Super-Formel:
+\[
+E = mc^2
+\]
+
+Ich kann die Formel auch inline im Text einbetten. Das sieht so aus: $E = mc^2$. Auch hübsch.
+
+Nun eine komliziertere Formel:
+\[
+x^2 = \frac{n^2}{\frac{mc^2*\sqrt{5x}}{\int_{x}^{y}5x*\sqrt{4x}}}
+\]
+
+\[
+42 = \sum_{x}^{k} x_i * k^3
+\]
+
+\section{Tabellen}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c||c|c|}
+        \hline
+        Zelle 1 & Zelle 2 & Zelle 3 \\ \hline\hline
+        Zelle 4 & Zelle 5 & Zelle 6 \\ \hline
+        Zelle 7 &         & Zelle 9 \\ \hline
+    \end{tabular}
+    \caption{Tabellen Beschreibung}
+    \label{tab:placeholder}
+\end{table}
 
 \end{document}
