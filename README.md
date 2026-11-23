@@ -237,6 +237,7 @@ A1 bis A4 bilden ein durchgehendes Projekt und sollten in dieser Reihenfolge bea
 
 - Im `main`-Branch liegen **Startdateien**. Jede Startdatei lässt sich sofort kompilieren. Die offenen Stellen sind mit `TODO` markiert, vorbereitete Testzeilen sind auskommentiert.
 - Im `musterlsg`-Branch liegen unter denselben Pfaden die **fertigen, kommentierten Lösungen**.
+- Zu den anspruchsvolleren Schritten gibt es aufklappbare **Hilfestellungen** (💡) direkt unter den Schritten. Versuchen Sie es zuerst ohne.
 - **Lokal:** Wechseln Sie in den jeweiligen Ordner und kompilieren Sie dort, z. B. `cd advanced/a1-befehle` und `pdflatex uebungsblatt.tex`.
 - **Overleaf:** Legen Sie pro Aufgabe ein Projekt an und laden Sie **alle Dateien des Ordners** hoch (auch `.sty`, `.cls`, `.csv` und das Logo). Wählen Sie über *Menu → Main document* die jeweilige `.tex`-Datei.
 - Pakete (`.sty`) und Klassen (`.cls`) müssen im selben Ordner liegen wie das Dokument, das sie lädt.
@@ -289,6 +290,42 @@ Beispiel: `{s O{0} m}` beschreibt einen Befehl mit Stern (`#1`), optionalem Argu
 4. **Schleife:** `\antwortzeilen{n}` zeichnet `n` Schreiblinien über die ganze Textbreite (`\rule{\linewidth}{0.4pt}`).
 5. Geben Sie am Ende des Dokuments die Summe mit `\thepunkte` aus.
 
+<details>
+<summary>💡 Hilfestellung zu Schritt 3 und 4</summary>
+
+Gerüst für `\aufgabe`. Es fehlt nur noch die Punkteangabe:
+
+```latex
+\NewDocumentCommand{\aufgabe}{O{0} m}{%
+  \stepcounter{aufgabe}%
+  \addtocounter{punkte}{#1}%
+  \subsection*{Aufgabe \theaufgabe: #2%
+    % TODO: Punkteangabe ergänzen
+  }%
+}
+```
+
+Bausteine für die Punkteangabe:
+- `\ifnum#1>0 ... \fi` gibt den Inhalt nur aus, wenn Punkte vergeben sind.
+- `\hfill` schiebt alles Folgende an den rechten Rand.
+- `{\normalfont\small(#1~Punkte)}` setzt die Angabe klein und nicht fett. `~` ist ein Leerzeichen ohne Zeilenumbruch.
+- `\ifnum#1=1 Punkt\else Punkte\fi` wählt Einzahl oder Mehrzahl.
+
+Gerüst für `\antwortzeilen`:
+
+```latex
+\NewDocumentCommand{\antwortzeilen}{m}{%
+  \par
+  \foreach \i in {1,...,#1}{%
+    % TODO: eine Linie über die ganze Breite, danach \par
+  }%
+}
+```
+
+`\rule{0pt}{8mm}` vor der Linie erzeugt eine unsichtbare Stütze und damit 8 mm Abstand zwischen den Linien.
+
+</details>
+
 #### Kontrolle
 
 Das PDF zeigt drei nummerierte Aufgaben mit Punkteangaben, darunter Schreiblinien und am Ende „Erreichbare Punkte: 4“.
@@ -340,8 +377,62 @@ Wichtige Punkte:
 3. **Farben:** Definieren Sie `fhrot` mit `\definecolor{fhrot}{RGB}{192,0,0}`. Im Schwarz-Weiß-Modus (`sw`) soll `fhrot` schwarz sein.
 4. **Befehle verschieben:** Übernehmen Sie `\fh`, die Zähler, `\aufgabe` und `\antwortzeilen` aus A1. Färben Sie „Aufgabe 1:“ mit `\textcolor{fhrot}{...}`. Entfernen Sie in `paket-test.tex` die Kommentarzeichen vor den passenden Zeilen.
 5. **Gesamtpunkte:** Schreiben Sie die Summe mit `\AtEndDocument` und `\immediate\write\@auxout{...}` in die `.aux`-Datei. Definieren Sie `\gesamtpunkte`, das den gespeicherten Wert ausgibt (beim ersten Durchlauf `??`).
-6. **Umgebung:** Definieren Sie mit `\NewDocumentEnvironment{hinweis}{O{Hinweis}}{Anfang}{Ende}` einen Hinweiskasten mit rotem Balken links und optionalem Titel.
+6. **Umgebung:** Definieren Sie mit `\NewDocumentEnvironment{hinweis}{O{Hinweis}}{Anfang}{Ende}` einen Hinweiskasten mit rotem, optionalem Titel. Zusatz für Schnelle: ein roter Balken links neben dem Text.
 7. **Entwurfsmodus:** `\anmerkung{Text}` zeigt den Text nur im Entwurfsmodus rot an. Ohne die Option erzeugt der Befehl keine Ausgabe.
+
+<details>
+<summary>💡 Hilfestellung zu Schritt 5 (Gesamtpunkte)</summary>
+
+Dieser Schritt ist der anspruchsvollste der Aufgabe. Der Code lautet:
+
+```latex
+\AtEndDocument{%
+  \immediate\write\@auxout{%
+    \gdef\string\mc@gesamt{\the\value{punkte}}}%
+}
+\newcommand{\gesamtpunkte}{%
+  \@ifundefined{mc@gesamt}{??}{\mc@gesamt}%
+}
+```
+
+So lesen Sie den Code:
+- `\AtEndDocument{...}` führt den Inhalt bei `\end{document}` aus.
+- `\immediate\write\@auxout{...}` schreibt eine Zeile in die `.aux`-Datei.
+- `\string\mc@gesamt` schreibt den Befehlsnamen als Text. `\the\value{punkte}` wird sofort durch die aktuelle Zahl ersetzt. In der `.aux`-Datei steht danach `\gdef \mc@gesamt{4}`.
+- Beim nächsten Durchlauf führt LaTeX diese Zeile bei `\begin{document}` aus. Damit ist `\mc@gesamt` von Anfang an bekannt.
+- `\@ifundefined{mc@gesamt}{??}{\mc@gesamt}` gibt beim ersten Durchlauf `??` aus und danach den Wert.
+
+Öffnen Sie nach dem Kompilieren die Datei `paket-test.aux` und suchen Sie die Zeile.
+
+</details>
+
+<details>
+<summary>💡 Hilfestellung zu Schritt 6 und 7</summary>
+
+Einfache Fassung der Umgebung mit rotem Titel:
+
+```latex
+\NewDocumentEnvironment{hinweis}{O{Hinweis}}{%
+  \par\medskip\noindent
+  \textbf{\textcolor{fhrot}{#1:}}\par
+}{%
+  \par\medskip
+}
+```
+
+Der erste Block in geschweiften Klammern läuft bei `\begin{hinweis}`, der zweite bei `\end{hinweis}`. `#1` ist der optionale Titel. Die Fassung mit rotem Balken links finden Sie in der Musterlösung.
+
+`\anmerkung` wird je nach Schalter unterschiedlich definiert:
+
+```latex
+\ifmc@entwurf
+  \newcommand{\anmerkung}[1]{\textcolor{fhrot}{[\textbf{Anm.:} #1]}}
+\else
+  \newcommand{\anmerkung}[1]{}
+\fi
+```
+
+</details>
 
 #### Kontrolle
 
@@ -399,8 +490,100 @@ Die Abschnitte 1 bis 4 der Klasse sind vorgegeben. Ergänzen Sie die Abschnitte 
 4. **Kopfzeile (9):** Links das Logo (`\includegraphics[height=13mm]{fh-logo.jpg}`), daneben eine rote Linie bis zum rechten Rand. Schalten Sie die Standardlinie von `fancyhdr` mit `\renewcommand{\headrulewidth}{0pt}` aus.
 5. **Fußzeile (9):** Rote Linie, darunter in kleiner grauer Schrift der Absender und rechts die Seitenzahl.
 6. **Umgebung `brief` (10):** `\begin{brief}{Anrede}` beginnt eine neue Seite, setzt die Seitenzahl auf 1 und gibt Adressfeld, Ort und Datum, Betreff und Anrede aus. `\end{brief}` gibt Grußformel und Namen aus.
-7. **Optionen (2 und 7):** `nologo` ersetzt das Logo durch Text. `english` lädt `babel` mit `english` und stellt „Seite“ auf „Page“ sowie die Grußformel um.
+7. **Optionen (2 und 7):** `nologo` ersetzt das Logo durch Text. `english` lädt `babel` mit `english` und stellt „Seite“ auf „Page“ sowie die Grußformel um. Legen Sie dazu Schalter an (wie in A2) und ersetzen Sie die festen Texte in Kopfzeile, Fußzeile und Grußformel durch Makros, die je nach Schalter unterschiedlich definiert sind.
 8. Entfernen Sie in `brief.tex` die Kommentarzeichen und tragen Sie mit `\absender` Ihre eigenen Daten ein.
+
+<details>
+<summary>💡 Hilfestellung zu Schritt 3 (Briefdaten)</summary>
+
+```latex
+% Absender mit Standardwerten
+\newcommand{\fhb@absname}{FH-Prof. Dr. Marc Kurz}
+\newcommand{\fhb@absstrasse}{Softwarepark 11}
+\newcommand{\fhb@absort}{4232 Hagenberg}
+\newcommand{\absender}[3]{%
+  \renewcommand{\fhb@absname}{#1}%
+  \renewcommand{\fhb@absstrasse}{#2}%
+  \renewcommand{\fhb@absort}{#3}%
+}
+
+\newcommand{\fhb@empfaenger}{}
+\newcommand{\empfaenger}[1]{\renewcommand{\fhb@empfaenger}{#1}}
+```
+
+`\betreff`, `\datum` und `\gruss` folgen demselben Muster. Bei `\datum` ist der Standardwert `\today`, bei `\gruss` die Grußformel.
+
+</details>
+
+<details>
+<summary>💡 Hilfestellung zu Schritt 4 und 5 (Kopf- und Fußzeile)</summary>
+
+```latex
+\pagestyle{fancy}
+\fancyhf{}                              % alle Felder leeren
+\renewcommand{\headrulewidth}{0pt}      % Standardlinien von fancyhdr aus
+\renewcommand{\footrulewidth}{0pt}
+
+% Kopfzeile: Logo, daneben eine rote Linie bis zum rechten Rand
+\fancyhead[L]{%
+  \makebox[\textwidth][l]{%
+    \includegraphics[height=13mm]{fh-logo.jpg}\hspace{6mm}%
+    {\color{fhrot}\leaders\hrule height 7.1mm depth -6.5mm\hfill\kern0pt}%
+  }%
+}
+
+% Fußzeile: rote Linie, darunter Absender und Seitenzahl
+\fancyfoot[L]{%
+  \parbox[t]{\textwidth}{%
+    {\color{fhrot}\rule{\textwidth}{0.6pt}}\\[1mm]
+    \footnotesize\color{fhgrau}%
+    \fhb@absname\ \textbullet\ \fhb@absstrasse\ \textbullet\ \fhb@absort
+    \hfill Seite\ \thepage
+  }%
+}
+```
+
+- `\makebox[\textwidth][l]{...}` ist eine Box in voller Textbreite mit linksbündigem Inhalt.
+- `\parbox[t]{\textwidth}{...}` ist ein Absatzkasten, in dem `\\` einen Zeilenumbruch erzeugt.
+- In Schritt 7 ersetzen Sie das Logo und das Wort „Seite“ durch Makros, die von den Optionen abhängen.
+
+</details>
+
+<details>
+<summary>💡 Hilfestellung zu Schritt 6 (Umgebung brief)</summary>
+
+```latex
+\newenvironment{brief}[1]{%
+  \clearpage
+  \setcounter{page}{1}%
+  % Adressfeld mit fester Höhe
+  \begin{minipage}[t][40mm][t]{85mm}
+    {\tiny\color{fhgrau}\underline{\fhb@absname, \fhb@absstrasse, \fhb@absort}}\par
+    \vspace{3mm}
+    \fhb@empfaenger
+  \end{minipage}
+  \par
+  \hfill \fhb@absort, \fhb@datum \par
+  \vspace{6mm}
+  \ifx\fhb@betreff\@empty\else
+    \textbf{\fhb@betreff}\par
+    \vspace{4mm}
+  \fi
+  #1\par
+}{%
+  \par
+  \vspace{6mm}
+  \fhb@gruss\par
+  \vspace{12mm}%
+  \fhb@absname\par
+  \clearpage
+}
+```
+
+- Der erste Block läuft bei `\begin{brief}{Anrede}`, `#1` ist die Anrede. Der zweite Block läuft bei `\end{brief}`.
+- `\begin{minipage}[t][40mm][t]{85mm}` ist ein Kasten mit 85 mm Breite und fester Höhe von 40 mm. So beginnt der Brieftext immer an derselben Stelle.
+
+</details>
 
 #### Kontrolle
 
@@ -447,7 +630,8 @@ Das PDF hat so viele Seiten wie die CSV-Datei Datenzeilen hat (zu Beginn 3). Jed
 
 💡 **Stolpersteine:**
 - Spaltenüberschriften dürfen nur Buchstaben enthalten und nicht wie bestehende Befehle heißen (also nicht `empfaenger` oder `betreff`).
-- Das Trennzeichen ist das Komma. Felder, die selbst ein Komma enthalten, müssen in Anführungszeichen stehen.
+- Das Trennzeichen ist das Komma. Felder, die selbst ein Komma enthalten, gehören in geschweifte Klammern: `{Testweg 3, Stiege 2}`. Anführungszeichen funktionieren hier nicht.
+- Zeilen mit falscher Spaltenanzahl überspringt `csvsimple` ohne Fehlermeldung. Fehlt ein Brief, prüfen Sie zuerst die Kommas in der betreffenden Zeile.
 
 ---
 
@@ -498,6 +682,44 @@ Das PDF hat so viele Seiten wie die CSV-Datei Datenzeilen hat (zu Beginn 3). Jed
 5. Setzen Sie den Folientitel schwarz und fett, blenden Sie die Navigationssymbole aus und färben Sie Blocktitel rot mit weißer Schrift.
 6. **Fußzeile:** Links „SEITE | Nummer“ (`\insertframenumber`), dann eine rote Linie, rechts das Logo.
 7. Aktivieren Sie das Theme in `folien.tex` mit `\usetheme{FH}`.
+
+<details>
+<summary>💡 Hilfestellung zu Schritt 4 bis 6 (Theme)</summary>
+
+```latex
+\ProvidesPackage{beamerthemeFH}[2026/11/23 v1.0 Beamer-Theme im FH-OOe-Stil]
+\mode<presentation>
+
+\definecolor{fhrot}{RGB}{192,0,0}
+\definecolor{fhgrau}{RGB}{100,100,100}
+
+\setbeamercolor{structure}{fg=fhrot}
+\setbeamercolor{frametitle}{fg=black}
+\setbeamercolor{block title}{fg=white,bg=fhrot}
+\setbeamercolor{block body}{bg=black!5}
+\setbeamerfont{frametitle}{series=\bfseries,size=\Large}
+\setbeamerfont{footline}{size=\tiny}
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamertemplate{footline}{%
+  \leavevmode
+  \hspace{5mm}%
+  \raisebox{2mm}{\usebeamerfont{footline}\textcolor{fhgrau}{SEITE | \insertframenumber}}%
+  \hspace{3mm}%
+  {\color{fhrot}\leaders\hrule height 3.3mm depth -2.9mm\hfill\kern0pt}%
+  \hspace{3mm}%
+  \IfFileExists{fh-logo.jpg}{\includegraphics[height=6mm]{fh-logo.jpg}}{}%
+  \hspace{5mm}%
+  \vspace{2mm}%
+}
+
+\mode<all>
+\endinput
+```
+
+Die Fußzeile besteht aus vier Teilen nebeneinander: Text mit Foliennummer, Linie, Logo, Randabstand. `\raisebox{2mm}{...}` hebt den Text an, damit er auf Höhe der Linie steht. Die Musterlösung enthält zusätzlich eine eigene Titelfolie.
+
+</details>
 
 #### Kontrolle
 
