@@ -912,7 +912,7 @@ Diese Tabelle bietet eine Übersicht über Online- bzw. Cloud-Plattformen für L
 | Plattform | Kurzbeschreibung | Kostenmodell | Besonderheiten | URL |
 |-----------|------------------|---------------|----------------|-----|
 | **Overleaf** | Marktführender Cloud-LaTeX-Editor mit Echtzeit-Kollaboration und zahlreichen Vorlagen. | Kostenlos (1 Kollaborateur pro Projekt, Kompilier-Timeout 10 Sekunden) / Bezahlpläne für Einzelpersonen, Teams und Hochschulen | Weit verbreitet, stabil, ideal für Lehre und Gruppenprojekte. Git- und GitHub-Anbindung nur in Bezahlplänen | [https://www.overleaf.com](https://www.overleaf.com) |
-| **Prism** (früher Crixet) | Cloud-LaTeX-Arbeitsumgebung von OpenAI mit integriertem KI-Assistenten und Echtzeit-Kollaboration. Crixet wurde im Jänner 2026 von OpenAI übernommen und in Prism überführt. | Kostenlos mit ChatGPT-Konto | Unbegrenzte Projekte und Mitwirkende; Inhalte liegen bei OpenAI | [https://openai.com/prism](https://openai.com/prism) |
+| **Prism** (früher Crixet) | Cloud-LaTeX-Arbeitsumgebung von OpenAI mit KI-Assistent. Crixet wurde im Jänner 2026 von OpenAI übernommen und in Prism überführt. | Kostenlos mit ChatGPT-Konto | ⚠️ **Wird am 1. Jänner 2027 eingestellt**, danach werden alle Projektdaten gelöscht. Nicht mehr für neue Projekte verwenden, bestehende Projekte vorher exportieren | [https://prism.openai.com](https://prism.openai.com) |
 | **Papeeria** | Online-LaTeX-Editor mit Mobile-Support und Git-Sync, LaTeX und Markdown mischbar. | Freemium | Echtzeit-Kollaboration, einfache Nutzerführung | [https://papeeria.com](https://papeeria.com) |
 | **CoCalc** | Cloud-Rechner + LaTeX-Editor + Jupyter/Terminal auf Linux-Basis — geeignet für Lehre und Forschung. | Kostenlos (Basis) / Bezahlpläne | Vollständige Online-Umgebung mit Terminal-Zugriff | [https://cocalc.com](https://cocalc.com) |
 | **Verbosus** | Browserbasierter LaTeX-Editor ohne Installation, mit Syntax-Highlighting und Vorschau. | Kostenlos / Freemium | Sehr einfacher Einstieg, geringerer Funktionsumfang | [https://www.verbosus.com](https://www.verbosus.com) |
@@ -921,7 +921,7 @@ Diese Tabelle bietet eine Übersicht über Online- bzw. Cloud-Plattformen für L
 ---
 
 📘 *Empfohlen für Workshops und Lehre:* **Overleaf** (Standard)  
-🧠 *Für erfahrene Anwender:innen:* **Prism** oder **CoCalc**  
+🧠 *Für erfahrene Anwender:innen:* **CoCalc**  
 💡 *Einfache Alternativen:* **Papeeria**, **Verbosus**
 
 ⚠️ *Overleaf:* Im kostenlosen Plan bricht die Kompilierung nach 10 Sekunden ab. Die Beispiele dieses Workshops sind bewusst klein gehalten.
