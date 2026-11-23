@@ -1,0 +1,73 @@
+% ============================================================
+%  beamerthemeFH.sty - eigenes Beamer-Theme (Musterlösung zu A5)
+%
+%  Ein Beamer-Theme ist ein ganz normales Paket. Der Dateiname
+%  muss "beamertheme<Name>.sty" lauten, dann lädt
+%  \usetheme{FH} genau diese Datei.
+%  Das Theme orientiert sich an den Workshop-Folien: rote
+%  Akzentfarbe, schwarzer fetter Folientitel, Fußzeile mit roter
+%  Linie, Seitennummer und Logo.
+% ============================================================
+\ProvidesPackage{beamerthemeFH}[2026/11/23 v1.0 Beamer-Theme im FH-OOe-Stil]
+
+% Alles Folgende gilt nur im Präsentationsmodus (nicht für Handouts
+% im article-Modus).
+\mode<presentation>
+
+% --- Farben -------------------------------------------------
+\definecolor{fhrot}{RGB}{192,0,0}
+\definecolor{fhgrau}{RGB}{100,100,100}
+
+% "structure" ist die Akzentfarbe von Beamer. Aufzählungszeichen,
+% Blocktitel usw. leiten ihre Farbe davon ab.
+\setbeamercolor{structure}{fg=fhrot}
+\setbeamercolor{frametitle}{fg=black}
+\setbeamercolor{title}{fg=black}
+\setbeamercolor{alerted text}{fg=fhrot}       % \alert{...}
+\setbeamercolor{block title}{fg=white,bg=fhrot}
+\setbeamercolor{block body}{bg=black!5}
+
+% --- Schriften ----------------------------------------------
+\setbeamerfont{frametitle}{series=\bfseries,size=\Large}
+\setbeamerfont{title}{series=\bfseries,size=\LARGE}
+\setbeamerfont{footline}{size=\tiny}
+
+% --- Aufzählungszeichen wie auf den Workshop-Folien ---------
+\setbeamertemplate{itemize item}{\textcolor{black}{--}}
+\setbeamertemplate{itemize subitem}{\textcolor{fhrot}{>}}
+
+% --- Navigationssymbole ausblenden --------------------------
+\setbeamertemplate{navigation symbols}{}
+
+% --- Fußzeile -----------------------------------------------
+% Links "SEITE | Nummer", daneben eine rote Linie, rechts das Logo.
+% \insertframenumber liefert die aktuelle Foliennummer.
+% Auf der Titelfolie wird die Fußzeile mit [plain] unterdrückt.
+\setbeamertemplate{footline}{%
+  \leavevmode
+  \hspace{5mm}%
+  \raisebox{2mm}{\usebeamerfont{footline}\textcolor{fhgrau}{SEITE | \insertframenumber}}%
+  \hspace{3mm}%
+  {\color{fhrot}\leaders\hrule height 3.3mm depth -2.9mm\hfill\kern0pt}%
+  \hspace{3mm}%
+  \IfFileExists{fh-logo.jpg}{\includegraphics[height=6mm]{fh-logo.jpg}}{}%
+  \hspace{5mm}%
+  \vspace{2mm}%
+}
+
+% --- Titelfolie ---------------------------------------------
+% Logo oben, darunter Titel, Untertitel und Autor linksbündig.
+\setbeamertemplate{title page}{%
+  \IfFileExists{fh-logo.jpg}{\includegraphics[height=12mm]{fh-logo.jpg}}{}%
+  \hspace{4mm}{\color{fhrot}\leaders\hrule height 6.6mm depth -6.0mm\hfill\kern0pt}\par
+  \vspace{18mm}
+  {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}
+  \vspace{3mm}
+  {\usebeamerfont{subtitle}\insertsubtitle\par}
+  \vspace{6mm}
+  {\small\insertauthor\par}
+  {\footnotesize\textcolor{fhgrau}{\insertdate}\par}
+}
+
+\mode<all>
+\endinput

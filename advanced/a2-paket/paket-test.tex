@@ -1,0 +1,38 @@
+% ============================================================
+%  A2 - Testdokument für das eigene Paket mcstyle.sty
+%  Kompilieren: zweimal pdflatex paket-test.tex
+%  (zweiter Durchlauf wegen \gesamtpunkte)
+% ============================================================
+\documentclass[a4paper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+% Varianten zum Ausprobieren:
+%   \usepackage{mcstyle}            normale Ausgabe
+%   \usepackage[entwurf]{mcstyle}   mit Entwurfsvermerk und Anmerkungen
+%   \usepackage[sw]{mcstyle}        Schwarz-Weiß
+\usepackage[entwurf]{mcstyle}
+
+\begin{document}
+
+\section*{Übungsblatt}
+Erstellt an der \fh{}. Insgesamt sind \textbf{\gesamtpunkte{} Punkte} erreichbar.
+
+\begin{hinweis}
+  Alle Befehle auf dieser Seite stammen aus \texttt{mcstyle.sty}.
+  Die Präambel bleibt dadurch kurz.
+\end{hinweis}
+
+\aufgabe[3]{Dokumentklassen}
+Nennen Sie drei Standardklassen von \LaTeX. \anmerkung{Lösung ergänzen}
+\antwortzeilen{3}
+
+\aufgabe[1]{Kompilieren}
+Welches Programm erzeugt aus einer \texttt{.tex}-Datei ein PDF?
+\antwortzeilen{1}
+
+\begin{hinweis}[Tipp]
+  Der Kasten akzeptiert einen eigenen Titel als optionales Argument.
+\end{hinweis}
+
+\end{document}

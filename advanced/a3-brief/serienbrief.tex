@@ -1,0 +1,33 @@
+% ============================================================
+%  A4 - Serienbrief: ein Brief pro Zeile der CSV-Datei
+%  Kompilieren: pdflatex serienbrief.tex
+%  Benötigt im selben Ordner: fhbrief.cls, fh-logo.jpg, empfaenger.csv
+% ============================================================
+\documentclass[11pt]{fhbrief}
+\usepackage{csvsimple}       % CSV-Dateien zeilenweise verarbeiten
+
+\betreff{Einladung zum \LaTeX-Workshop}
+
+\begin{document}
+
+% \csvreader[Optionen]{Datei}{Spaltenzuordnung}{Inhalt pro Zeile}
+%
+% head to column names: Die erste Zeile der CSV-Datei liefert die
+% Namen. Aus der Spalte "name" wird der Befehl \name, aus "ort"
+% der Befehl \ort usw. Die Spaltenzuordnung {} bleibt daher leer.
+%
+% Der Inhalt in der letzten Klammer wird für jede Datenzeile einmal
+% ausgeführt. Die Umgebung "brief" beginnt jedes Mal eine neue Seite.
+\csvreader[head to column names]{empfaenger.csv}{}{%
+  \empfaenger{\name\\\strasse\\\ort}%
+  \begin{brief}{\anrede,}
+    hiermit lade ich Sie zum \LaTeX-Workshop am Campus Hagenberg ein.
+
+    Sie haben sich für das Thema \emph{\thema} interessiert.
+    Dieses Thema ist Teil des Abschnitts \LaTeX{} Advanced.
+
+    Ich freue mich auf Ihre Teilnahme.
+  \end{brief}
+}
+
+\end{document}

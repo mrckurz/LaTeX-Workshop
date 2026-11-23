@@ -1,0 +1,30 @@
+% ============================================================
+%  A3 - Brief mit der eigenen Klasse fhbrief.cls
+%  Kompilieren: pdflatex brief.tex
+%  Benötigt im selben Ordner: fhbrief.cls, fh-logo.jpg
+% ============================================================
+\documentclass[11pt]{fhbrief}
+% Varianten zum Ausprobieren:
+%   \documentclass[11pt,nologo]{fhbrief}
+%   \documentclass[12pt,english]{fhbrief}
+
+% Eigenen Absender setzen (sonst gelten die Standardwerte der Klasse):
+% \absender{Max Mustermann}{Musterstraße 1}{4232 Hagenberg}
+
+\empfaenger{Frau\\Erika Musterfrau\\Musterweg 1\\4020 Linz}
+\betreff{Einladung zum \LaTeX-Workshop}
+% \datum{23. November 2026}     % ohne Angabe: heutiges Datum
+
+\begin{document}
+
+\begin{brief}{Sehr geehrte Frau Musterfrau,}
+  hiermit lade ich Sie zum \LaTeX-Workshop am Campus Hagenberg ein.
+
+  Im Workshop erstellen wir eigene Pakete und Klassen. Dieser Brief ist
+  selbst ein Ergebnis davon: Layout, Kopfzeile und Fußzeile kommen aus
+  der Klasse \texttt{fhbrief.cls}, das Dokument enthält nur noch den Inhalt.
+
+  Ich freue mich auf Ihre Teilnahme.
+\end{brief}
+
+\end{document}

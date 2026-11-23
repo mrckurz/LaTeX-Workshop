@@ -1,0 +1,70 @@
+% ============================================================
+%  A5 - Präsentation mit Beamer und eigenem Theme
+%  Kompilieren: pdflatex folien.tex
+%  Benötigt im selben Ordner: beamerthemeFH.sty, fh-logo.jpg
+% ============================================================
+% aspectratio=169 erzeugt Folien im Format 16:9
+\documentclass[aspectratio=169,11pt]{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usetheme{FH}                % lädt beamerthemeFH.sty
+
+\title{\LaTeX{} Advanced}
+\subtitle{Präsentationen mit Beamer}
+\author{Max Mustermann}
+\date{\today}
+
+\begin{document}
+
+% [plain] = Folie ohne Kopf- und Fußzeile
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+% --- Folie mit schrittweisem Aufbau ---
+\begin{frame}{Schrittweiser Aufbau}
+  \begin{itemize}
+    \item Eine Folie ist eine \texttt{frame}-Umgebung.
+    \pause   % alles danach erscheint erst beim nächsten Klick
+    \item \texttt{\textbackslash pause} teilt die Folie in Schritte.
+    \pause
+    \item Aus einer Folie werden so mehrere PDF-Seiten.
+      \begin{itemize}
+        \item Die Foliennummer bleibt dabei gleich.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+% --- Folie mit Overlay-Angaben ---
+\begin{frame}{Overlays gezielt steuern}
+  \begin{itemize}
+    \item<1-> Dieser Punkt ist ab Schritt 1 sichtbar.
+    \item<2-> Dieser Punkt ist ab Schritt 2 sichtbar.
+    \item<3>  Dieser Punkt ist nur in Schritt 3 sichtbar.
+  \end{itemize}
+
+  \bigskip
+  % \only belegt nur dann Platz, wenn der Inhalt sichtbar ist.
+  \only<1>{Schritt 1: Text nur im ersten Schritt.}%
+  \only<2->{Ab Schritt 2: \alert{hervorgehobener Text} mit \texttt{\textbackslash alert}.}
+\end{frame}
+
+% --- Folie mit Block und Spalten ---
+\begin{frame}{Blöcke und Spalten}
+  \begin{columns}[T]         % [T] = Spalten oben ausrichten
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Block}
+        Blöcke heben Inhalte hervor. Die Farben kommen aus dem Theme.
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      Formeln funktionieren wie gewohnt:
+      \[
+        E = mc^2
+      \]
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,61 @@
+% ============================================================
+%  A8 - Typografie-Feinschliff: microtype, csquotes, siunitx
+%  Kompilieren: pdflatex typografie.tex
+% ============================================================
+\documentclass[a4paper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}          % skalierbare Schrift (Voraussetzung für microtype-Expansion)
+\usepackage[ngerman]{babel}
+\usepackage{booktabs}
+
+% microtype: feinerer Randausgleich und weniger Trennungen.
+% Einfach laden, keine weiteren Befehle nötig.
+\usepackage{microtype}
+
+% csquotes: \enquote{...} setzt die zur Sprache passenden Anführungszeichen.
+\usepackage[autostyle]{csquotes}
+
+% siunitx: Zahlen und Einheiten einheitlich setzen.
+%   locale=DE: Dezimalkomma statt Dezimalpunkt in der Ausgabe
+\usepackage[locale=DE]{siunitx}
+
+\begin{document}
+
+\section*{Anführungszeichen}
+Falsch getippt: "Hallo Welt". Richtig mit csquotes: \enquote{Hallo Welt}.
+Auch verschachtelt: \enquote{Er sagte \enquote{Hallo} und ging.}
+
+\section*{Zahlen und Einheiten}
+\begin{itemize}
+  \item Zahl mit Tausendertrennung: \num{1234567.89}
+  \item Zahl mit Einheit: \qty{12.5}{\kilo\metre\per\hour}
+  \item Nur die Einheit: \unit{\micro\second}
+  \item Bereich: \qtyrange{10}{20}{\celsius}
+  \item Speichergröße: \qty{512}{\mega\byte}
+\end{itemize}
+
+\section*{Tabelle mit ausgerichteten Dezimalstellen}
+Die Spalte \texttt{S} richtet Zahlen am Dezimaltrennzeichen aus.
+Text in einer \texttt{S}-Spalte gehört in geschweifte Klammern.
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{l S[table-format=3.2] S[table-format=2.1]}
+    \toprule
+    Gerät & {Startzeit in \unit{\milli\second}} & {Akku in \unit{\percent}} \\
+    \midrule
+    Smartphone A & 120.5  & 87.5 \\
+    Smartphone B &  98.25 &  9.0 \\
+    Tablet C     & 240    & 54.3 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Messwerte, mit \texttt{siunitx} gesetzt}
+\end{table}
+
+\section*{Randausgleich}
+Dieser Absatz dient als Testtext für \texttt{microtype}. Kommentieren Sie das
+Paket in der Präambel aus und vergleichen Sie den rechten Rand und die Anzahl
+der Trennungen. Der Unterschied ist klein, summiert sich bei langen Dokumenten
+wie einer Bachelorarbeit aber deutlich.
+
+\end{document}

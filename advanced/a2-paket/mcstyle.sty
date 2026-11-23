@@ -1,0 +1,126 @@
+% ============================================================
+%  mcstyle.sty - eigenes Paket (Musterlösung zu A2)
+%
+%  Ein Paket ist eine Sammlung von Definitionen, die mit
+%  \usepackage{mcstyle} in beliebig viele Dokumente geladen wird.
+%  Die Datei muss im selben Ordner wie das Dokument liegen
+%  (oder im lokalen texmf-Baum installiert sein).
+% ============================================================
+
+% --- 1. Kopf des Pakets -------------------------------------
+% Mindestanforderung an das LaTeX-Format. \NewDocumentCommand
+% ist seit LaTeX 2020-10-01 ohne Zusatzpaket verfügbar.
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+% Name (muss dem Dateinamen entsprechen), Datum, Version, Kurzbeschreibung.
+% Diese Zeile erscheint in der .log-Datei.
+\ProvidesPackage{mcstyle}[2026/11/23 v1.0 Stil fuer den LaTeX-Workshop]
+
+% --- 2. Optionen --------------------------------------------
+% Ein Schalter (\newif) merkt sich, ob eine Option gesetzt wurde.
+% \newif\ifmc@entwurf erzeugt \mc@entwurftrue, \mc@entwurffalse
+% und die Abfrage \ifmc@entwurf ... \else ... \fi.
+% Das @ im Namen kennzeichnet interne Befehle. In .sty- und
+% .cls-Dateien ist @ automatisch als Buchstabe erlaubt.
+\newif\ifmc@entwurf   \mc@entwurffalse
+\newif\ifmc@sw        \mc@swfalse
+
+% \usepackage[entwurf]{mcstyle} -> Entwurfsmodus einschalten
+\DeclareOption{entwurf}{\mc@entwurftrue}
+% \usepackage[sw]{mcstyle}      -> Schwarz-Weiß (z. B. für den Druck)
+\DeclareOption{sw}{\mc@swtrue}
+% Alle anderen Optionen: Warnung ausgeben statt stillschweigend ignorieren
+\DeclareOption*{%
+  \PackageWarning{mcstyle}{Unbekannte Option '\CurrentOption'}}
+% Optionen jetzt auswerten. \relax verhindert, dass LaTeX nach
+% einem Stern hinter \ProcessOptions sucht.
+\ProcessOptions\relax
+
+% --- 3. Benötigte Pakete ------------------------------------
+% In Paketen und Klassen verwendet man \RequirePackage statt \usepackage.
+\RequirePackage{xcolor}
+\RequirePackage{pgffor}
+
+% --- 4. Farben ----------------------------------------------
+% Das Rot der FH OÖ aus den Workshop-Folien (RGB 192,0,0).
+\ifmc@sw
+  \definecolor{fhrot}{RGB}{0,0,0}%       Schwarz-Weiß-Modus: Rot wird Schwarz
+\else
+  \definecolor{fhrot}{RGB}{192,0,0}
+\fi
+\definecolor{fhgrau}{RGB}{100,100,100}
+
+% --- 5. Befehle aus A1 --------------------------------------
+\NewDocumentCommand{\fh}{s}{%
+  \IfBooleanTF{#1}%
+    {University of Applied Sciences Upper Austria}%
+    {FH Oberösterreich}%
+}
+
+\newcounter{aufgabe}
+\newcounter{punkte}
+
+\NewDocumentCommand{\aufgabe}{O{0} m}{%
+  \stepcounter{aufgabe}%
+  \addtocounter{punkte}{#1}%
+  \subsection*{\textcolor{fhrot}{Aufgabe \theaufgabe:} #2%
+    \ifnum#1>0 %
+      \hfill{\normalfont\small(#1~\ifnum#1=1 Punkt\else Punkte\fi)}%
+    \fi}%
+}
+
+\NewDocumentCommand{\antwortzeilen}{m}{%
+  \par
+  \foreach \mc@i in {1,...,#1}{%
+    \noindent\rule{0pt}{8mm}\rule{\linewidth}{0.4pt}\par
+  }%
+}
+
+% --- 6. Gesamtpunkte schon am Dokumentanfang ----------------
+% Problem: Die Summe steht erst am Dokumentende fest.
+% Lösung:  Am Ende wird die Summe in die .aux-Datei geschrieben.
+%          Beim nächsten Durchlauf liest LaTeX die .aux-Datei bei
+%          \begin{document} ein und kennt den Wert von Anfang an.
+%          Deshalb sind zwei Durchläufe nötig (wie bei \ref).
+\AtEndDocument{%
+  \immediate\write\@auxout{%
+    \gdef\string\mc@gesamt{\the\value{punkte}}}%
+}
+% \gesamtpunkte gibt den gespeicherten Wert aus. Beim allerersten
+% Durchlauf existiert er noch nicht, dann erscheint "??".
+\newcommand{\gesamtpunkte}{%
+  \@ifundefined{mc@gesamt}{??}{\mc@gesamt}%
+}
+
+% --- 7. Eigene Umgebung: Hinweiskasten ----------------------
+% \begin{hinweis}[Titel] ... \end{hinweis}
+% Ein roter Balken links, daneben der Text.
+% Vorgehen: Der Inhalt wird zuerst in eine Box "gespeichert"
+% (lrbox), damit seine Höhe bekannt ist. Danach wird links eine
+% Linie gesetzt (\vrule), die automatisch so hoch wird wie die Box.
+\newsavebox{\mc@hinweisbox}
+\NewDocumentEnvironment{hinweis}{O{Hinweis}}{%
+  \begin{lrbox}{\mc@hinweisbox}%
+  \begin{minipage}{\dimexpr\linewidth-3pt-0.8em\relax}
+    \textbf{\textcolor{fhrot}{#1:}}\par
+}{%
+  \end{minipage}%
+  \end{lrbox}%
+  \par\medskip\noindent
+  \textcolor{fhrot}{\vrule width 3pt}\hspace{0.8em}\usebox{\mc@hinweisbox}%
+  \par\medskip
+}
+
+% --- 8. Entwurfsmodus ---------------------------------------
+% Im Entwurfsmodus erscheint ein Vermerk am Dokumentanfang und
+% \anmerkung{...} wird rot im Text angezeigt. Ohne die Option
+% verschwinden alle Anmerkungen aus dem PDF.
+\ifmc@entwurf
+  \newcommand{\anmerkung}[1]{\textcolor{fhrot}{[\textbf{Anm.:} #1]}}
+  \AtBeginDocument{%
+    \noindent\textcolor{fhrot}{\textbf{ENTWURF} -- Stand: \today}\par\medskip}
+\else
+  \newcommand{\anmerkung}[1]{}
+\fi
+
+% Ende des Pakets. Alles nach \endinput wird ignoriert.
+\endinput

@@ -1,0 +1,30 @@
+\chapter{Grundlagen}
+\label{ch:grundlagen}
+
+\section{Verweise mit cleveref}
+\label{sec:verweise}
+
+\Cref{tab:befehle} fasst die wichtigsten Befehle zusammen.
+Am Satzanfang steht \verb|\Cref|, im Satz \verb|\cref|.
+Mehrere Ziele auf einmal: \cref{ch:einleitung,ch:fazit}.
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{lp{7.5cm}}
+    \toprule
+    Befehl & Wirkung \\
+    \midrule
+    \verb|\input{datei}|   & fügt die Datei an dieser Stelle ein \\
+    \verb|\include{datei}| & wie \verb|\input|, zusätzlich neue Seite und eigene \texttt{.aux}-Datei \\
+    \verb|\includeonly{...}| & übersetzt nur die genannten Dateien \\
+    \bottomrule
+  \end{tabular}
+  \caption{Befehle zum Aufteilen eines Dokuments}
+  \label{tab:befehle}
+\end{table}
+
+\section{Abkürzungen}
+
+\gls{ci} kam schon in der Einleitung vor und erscheint hier nur noch als Kurzform.
+\gls{cd} wird zum ersten Mal verwendet und daher ausgeschrieben.
+\todo[inline]{Abschnitt zu Continuous Delivery ausbauen}

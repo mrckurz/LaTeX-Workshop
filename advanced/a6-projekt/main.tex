@@ -1,0 +1,60 @@
+% ============================================================
+%  A6 - Großes Projekt: Hauptdatei
+%  Kompilieren: latexmk -pdf main.tex   (oder mehrmals pdflatex)
+%  Struktur:
+%    main.tex            Präambel und Reihenfolge der Kapitel
+%    abkuerzungen.tex    Definition der Abkürzungen
+%    kapitel/*.tex       je Kapitel eine Datei
+% ============================================================
+\documentclass[a4paper,11pt]{report}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+% --- Anmerkungen im Rand ------------------------------------
+% \todo{...} setzt eine Notiz in den Rand, \listoftodos listet alle auf.
+% Für die Abgabe: Option "disable" ergänzen, dann verschwinden alle Notizen.
+\usepackage[textsize=footnotesize]{todonotes}
+\setlength{\marginparwidth}{2.5cm}
+
+% --- Reihenfolge ist wichtig: hyperref -> glossaries -> cleveref ---
+\usepackage[hidelinks]{hyperref}     % klickbare Verweise
+
+% Abkürzungsverzeichnis
+%   acronym: eigene Liste für Abkürzungen
+%   nomain:  kein allgemeines Glossar
+% \makenoidxglossaries sortiert innerhalb von LaTeX. Es ist kein
+% Zusatzprogramm nötig, daher läuft es in Overleaf und lokal gleich.
+\usepackage[acronym,nomain]{glossaries}
+\makenoidxglossaries
+\input{abkuerzungen}
+
+% Verweise mit automatischem Namen: \cref{fig:x} ergibt "Abbildung 1"
+\usepackage[ngerman]{cleveref}
+
+% --- Nur einzelne Kapitel übersetzen ------------------------
+% Spart Zeit bei großen Dokumenten. Seitenzahlen und Verweise der
+% ausgelassenen Kapitel bleiben erhalten (aus den .aux-Dateien).
+% \includeonly{kapitel/grundlagen}
+
+\title{Projektbericht}
+\author{Max Mustermann}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\listoftodos
+
+% \include beginnt immer eine neue Seite und legt pro Datei eine
+% eigene .aux-Datei an. Dateiname ohne Endung angeben.
+\include{kapitel/einleitung}
+\include{kapitel/grundlagen}
+\include{kapitel/fazit}
+
+% Abkürzungsverzeichnis ausgeben
+\printnoidxglossary[type=\acronymtype,title=Abkürzungsverzeichnis]
+
+\end{document}
