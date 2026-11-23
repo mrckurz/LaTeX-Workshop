@@ -22,7 +22,30 @@ Die Einheiten 1 bis 3 richten sich an Einsteiger:innen. Wer bereits Erfahrung mi
 
 ## 🚀 Einstieg
 
-### 1️⃣ Setup
+### 1️⃣ Repository forken
+
+Ein Fork ist Ihre eigene Kopie dieses Repositories auf GitHub. Darin können Sie frei arbeiten, committen und pushen, ohne das Original zu verändern.
+
+1. Melden Sie sich bei GitHub an und klicken Sie auf dieser Seite rechts oben auf **Fork**.
+2. Wählen Sie unter *Owner* Ihren eigenen Account.
+3. **Entfernen Sie das Häkchen bei „Copy the `main` branch only“.** Standardmäßig ist es gesetzt. Dann enthält Ihr Fork nur den `main`-Branch, und der Branch `musterlsg` mit den Musterlösungen fehlt.
+4. Klicken Sie auf **Create fork**.
+
+![Dialog „Create a new fork“ mit entferntem Häkchen bei „Copy the main branch only“](img/fork.png)
+
+Anschließend klonen Sie Ihren Fork auf Ihren Rechner (`<IhrName>` durch Ihren GitHub-Namen ersetzen):
+
+```bash
+git clone https://github.com/<IhrName>/LaTeX-Workshop.git
+cd LaTeX-Workshop
+git branch -a          # zeigt alle Branches, auch origin/musterlsg
+git switch musterlsg   # zu den Musterlösungen wechseln
+git switch main        # zurück zu den Aufgaben
+```
+
+💡 **Ohne GitHub-Account:** Sie können das Repository auch direkt klonen (`git clone https://github.com/mrckurz/LaTeX-Workshop.git`) oder über *Code → Download ZIP* herunterladen. Das ZIP enthält nur den gerade ausgewählten Branch. Pushen und die CI-Aufgabe (A7) sind nur mit eigenem Fork möglich.
+
+### 2️⃣ Setup
 - **Empfohlen:** [Overleaf](https://www.overleaf.com)
   - oder eine weitere [Cloud-basierte Alternative](#-übersicht-cloudbasierte-latex-editoren)
 - **Alternativ:**  
@@ -30,7 +53,7 @@ Die Einheiten 1 bis 3 richten sich an Einsteiger:innen. Wer bereits Erfahrung mi
   - Editor: VS Code + *LaTeX Workshop*-Extension
  
 
-### 2️⃣ Minimales Dokument
+### 3️⃣ Minimales Dokument
 ```latex
 \documentclass[a4paper,11pt]{article}
 \begin{document}
@@ -241,6 +264,42 @@ A1 bis A4 bilden ein durchgehendes Projekt und sollten in dieser Reihenfolge bea
 - **Lokal:** Wechseln Sie in den jeweiligen Ordner und kompilieren Sie dort, z. B. `cd advanced/a1-befehle` und `pdflatex uebungsblatt.tex`.
 - **Overleaf:** Legen Sie pro Aufgabe ein Projekt an und laden Sie **alle Dateien des Ordners** hoch (auch `.sty`, `.cls`, `.csv` und das Logo). Wählen Sie über *Menu → Main document* die jeweilige `.tex`-Datei.
 - Pakete (`.sty`) und Klassen (`.cls`) müssen im selben Ordner liegen wie das Dokument, das sie lädt.
+
+### 📄 Dateitypen im Überblick
+
+In einem LaTeX-Projekt gibt es zwei Arten von Dateien: solche, die Sie selbst schreiben, und solche, die LaTeX beim Kompilieren erzeugt.
+
+**Dateien, die Sie schreiben** (gehören ins Git-Repository):
+
+| Endung | Art | Inhalt und Zweck |
+|--------|-----|------------------|
+| `.tex` | Quelltext | Das Dokument oder ein Teil davon. Teile werden mit `\input` oder `\include` eingebunden (A6) |
+| `.sty` | Paket (*style*) | Sammlung von Befehlen und Einstellungen, geladen mit `\usepackage{name}` (A2). Auch Beamer-Themes sind `.sty`-Dateien (A5) |
+| `.cls` | Klasse (*class*) | Grundgerüst eines Dokumenttyps, geladen mit `\documentclass{name}` (A3). Genau eine pro Dokument |
+| `.bib` | Literaturdatenbank | Quellenangaben für `biblatex` (Aufgabe 5) |
+| `.csv` | Daten | Tabellarische Daten, hier die Adressen für den Serienbrief (A4) |
+| `.latexmkrc` | Konfiguration | Einstellungen für `latexmk` (A7) |
+| `.jpg`, `.png`, `.pdf` | Grafiken | Bilder, eingebunden mit `\includegraphics` |
+
+**Dateien, die LaTeX erzeugt** (gehören nicht ins Repository, siehe `.gitignore`):
+
+| Endung | Erzeugt von | Inhalt und Zweck |
+|--------|-------------|------------------|
+| `.pdf` | `pdflatex` | Das fertige Dokument |
+| `.log` | `pdflatex` | Protokoll des letzten Laufs mit allen Meldungen, Warnungen und Fehlern. Erste Anlaufstelle bei Problemen |
+| `.aux` | `pdflatex` | Hilfsdatei (*auxiliary*): Merkzettel für den nächsten Lauf. Enthält Ziele von `\label`, Zählerstände und Daten von Paketen (A2). `\include` legt pro Kapitel eine eigene `.aux`-Datei an |
+| `.toc` | `\tableofcontents` | Einträge des Inhaltsverzeichnisses |
+| `.out` | `hyperref` | PDF-Lesezeichen |
+| `.nav`, `.snm` | `beamer` | Navigationsdaten der Präsentation (A5) |
+| `.tdo` | `todonotes` | Einträge für `\listoftodos` (A6) |
+| `.bbl`, `.bcf`, `.run.xml` | `biblatex`, `biber` | Aufbereitetes Literaturverzeichnis (Aufgabe 5) |
+| `.fls`, `.fdb_latexmk` | `latexmk` | Liste der verwendeten Dateien. Daran erkennt `latexmk`, was neu gebaut werden muss (A7) |
+| `.synctex.gz` | Editor | Zuordnung zwischen Quelltext und PDF für den Sprung per Klick |
+
+Merkregeln:
+- Erzeugte Dateien können Sie jederzeit löschen. Beim nächsten Kompilieren entstehen sie neu. `latexmk -c` räumt sie in einem Schritt weg.
+- Viele dieser Dateien werden in einem Lauf geschrieben und erst im nächsten gelesen. Deshalb sind für Inhaltsverzeichnis, Verweise und Literatur mehrere Durchläufe nötig.
+- Verhält sich ein Dokument nach größeren Änderungen merkwürdig, hilft oft: Hilfsdateien löschen und neu kompilieren.
 
 ---
 
@@ -826,7 +885,7 @@ $pdflatex = 'pdflatex -interaction=nonstopmode -file-line-error -halt-on-error %
 
 **Teil 3: GitHub Actions**
 
-6. Erstellen Sie einen Fork dieses Repositories in Ihrem GitHub-Account und aktivieren Sie dort im Reiter *Actions* die Workflows.
+6. Falls noch nicht geschehen: Erstellen Sie einen Fork dieses Repositories (siehe [Einstieg](#-einstieg)). Aktivieren Sie in Ihrem Fork im Reiter *Actions* die Workflows.
 7. Legen Sie die Datei `.github/workflows/build.yml` an:
 
 ```yaml
