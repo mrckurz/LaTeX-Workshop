@@ -328,6 +328,43 @@ Die Argumentbeschreibung besteht aus einem Buchstaben pro Argument:
 
 Beispiel: `{s O{0} m}` beschreibt einen Befehl mit Stern (`#1`), optionalem Argument (`#2`, Standard 0) und Pflichtargument (`#3`).
 
+#### Beispiel Zeile für Zeile: Befehl mit Sternvariante
+
+Der folgende Code definiert den Befehl `\fh` mit zwei Varianten: `\fh` gibt „FH Oberösterreich“ aus, `\fh*` gibt „University of Applied Sciences Upper Austria“ aus.
+
+```latex
+\NewDocumentCommand{\fh}{s}{%
+  \IfBooleanTF{#1}%
+    {University of Applied Sciences Upper Austria}%
+    {FH Oberösterreich}%
+}
+```
+
+| Zeile | Code | Erklärung |
+|-------|------|-----------|
+| 1 | `\NewDocumentCommand{\fh}{s}{%` | `\NewDocumentCommand` hat drei Argumente. `{\fh}` ist der Name des neuen Befehls. Existiert er schon, bricht LaTeX mit einem Fehler ab. `{s}` ist die Argumentbeschreibung mit einem Buchstaben pro Argument, hier also genau ein Argument vom Typ `s`. Das `s` steht für „star“: LaTeX prüft, ob direkt nach `\fh` ein Stern folgt. Das Ergebnis landet als Wahrheitswert in `#1`. Mit der öffnenden Klammer am Zeilenende beginnt die Definition, also das, wodurch `\fh` ersetzt wird |
+| 2 | `\IfBooleanTF{#1}%` | Eine Verzweigung mit drei Argumenten: dem Wahrheitswert, dem Wahr-Zweig und dem Falsch-Zweig. „TF“ steht für „True/False“ und gibt die Reihenfolge der beiden Zweige an. `#1` ist der Wahrheitswert aus dem Stern-Test |
+| 3 | `{University of Applied Sciences Upper Austria}%` | Der Wahr-Zweig. Er wird ausgegeben, wenn ein Stern da war (`\fh*`) |
+| 4 | `{FH Oberösterreich}%` | Der Falsch-Zweig. Er wird ausgegeben, wenn kein Stern da war (`\fh`) |
+| 5 | `}` | Ende der Definition |
+
+**Was beim Aufruf passiert:**
+
+| Eingabe | `#1` | Ausgabe |
+|---------|------|---------|
+| `\fh` | falsch | FH Oberösterreich |
+| `\fh*` | wahr | University of Applied Sciences Upper Austria |
+
+Der Stern wird dabei verbraucht, er erscheint nicht im PDF.
+
+**Wozu die Prozentzeichen?** In TeX zählt ein Zeilenende wie ein Leerzeichen. Das `%` kommentiert das Zeilenende aus und verhindert so, dass ein Leerzeichen entsteht. Wichtig ist das an zwei Stellen: nach der öffnenden Klammer in Zeile 1 und nach dem letzten Zweig in Zeile 4. Ohne diese beiden `%` stünde vor bzw. nach dem ausgegebenen Text ein zusätzliches Leerzeichen. Aus `(\fh)` würde dann „( FH Oberösterreich )“. Die `%` in Zeile 2 und 3 sind streng genommen nicht nötig, weil TeX Leerzeichen überspringt, während es nach dem nächsten Argument sucht. Man setzt sie trotzdem konsequent, damit man nicht bei jeder Zeile nachdenken muss.
+
+**Stolperstein bei der Verwendung:** Nach einem Befehl ohne Argument verschluckt TeX das folgende Leerzeichen. `\fh ist toll` ergibt deshalb „FH Oberösterreichist toll“. Abhilfe schafft ein leeres Klammerpaar: `\fh{} ist toll`. Bei `\fh*` tritt das Problem nicht auf, weil der Stern den Befehlsnamen beendet und das Leerzeichen danach erhalten bleibt.
+
+**Warum nicht `\newcommand`?** `\newcommand` kann keine Sternvariante erkennen. Man bräuchte dafür zwei Hilfsbefehle und den internen Befehl `\@ifstar`. `\NewDocumentCommand` erledigt dasselbe mit dem einen Buchstaben `s`. Das Muster ist von `\section` und `\section*` bekannt.
+
+#### Weitere Bausteine
+
 **Zähler** speichern ganze Zahlen:
 
 ```latex
@@ -343,7 +380,7 @@ Beispiel: `{s O{0} m}` beschreibt einen Befehl mit Stern (`#1`), optionalem Argu
 
 #### Schritte
 
-1. **Sternvariante:** Definieren Sie `\fh`. Ohne Stern liefert der Befehl „FH Oberösterreich“, mit Stern „University of Applied Sciences Upper Austria“. Entfernen Sie danach das `%` vor der Testzeile zu Schritt 1.
+1. **Sternvariante:** Definieren Sie `\fh` wie im Beispiel oben. Ohne Stern liefert der Befehl „FH Oberösterreich“, mit Stern „University of Applied Sciences Upper Austria“. Entfernen Sie danach das `%` vor der Testzeile zu Schritt 1. Testen Sie auch, was ohne die Prozentzeichen und was bei `\fh ist toll` passiert.
 2. **Zähler:** Legen Sie die Zähler `aufgabe` und `punkte` an.
 3. **`\aufgabe[Punkte]{Titel}`:** Der Befehl erhöht die Aufgabennummer, addiert die Punkte zur Summe und gibt eine Überschrift der Form „Aufgabe 1: Titel“ aus. Rechts steht „(3 Punkte)“. Bei 0 Punkten entfällt die Angabe, bei 1 Punkt steht „Punkt“ statt „Punkte“.
 4. **Schleife:** `\antwortzeilen{n}` zeichnet `n` Schreiblinien über die ganze Textbreite (`\rule{\linewidth}{0.4pt}`).
