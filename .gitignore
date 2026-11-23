@@ -4,3 +4,21 @@
 *.log
 *.pdf
 *.synctex.gz
+# weitere Hilfsdateien (LaTeX Advanced)
+*.toc
+*.out
+*.nav
+*.snm
+*.vrb
+*.tdo
+*.acn
+*.acr
+*.alg
+*.glo
+*.gls
+*.glg
+*.ist
+*.bbl
+*.bcf
+*.blg
+*.run.xml

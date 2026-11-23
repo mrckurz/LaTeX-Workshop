@@ -1,0 +1,53 @@
+% ============================================================
+%  A8 - Typografie-Feinschliff (Startdatei)
+%  Kompilieren: pdflatex typografie.tex
+%  Das Dokument ist absichtlich "roh" gesetzt.
+%  Aufgaben laut README:
+%    1. Anführungszeichen mit csquotes (\enquote)
+%    2. Zahlen und Einheiten mit siunitx (\num, \qty, \unit)
+%    3. Tabelle mit S-Spalten ausrichten
+%    4. microtype laden und Ergebnis vergleichen
+% ============================================================
+\documentclass[a4paper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}          % skalierbare Schrift (Voraussetzung für microtype-Expansion)
+\usepackage[ngerman]{babel}
+\usepackage{booktabs}
+
+% TODO: microtype, csquotes (Option autostyle), siunitx (Option locale=DE)
+
+\begin{document}
+
+\section*{Anführungszeichen}
+Falsch getippt: "Hallo Welt". % TODO: \enquote{Hallo Welt}
+
+\section*{Zahlen und Einheiten}
+\begin{itemize}
+  \item Zahl mit Tausendertrennung: 1234567.89
+  \item Zahl mit Einheit: 12.5 km/h
+  \item Bereich: 10-20 Grad Celsius
+  \item Speichergröße: 512MB
+\end{itemize}
+
+\section*{Tabelle}
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{l c c}
+    \toprule
+    Gerät & Startzeit in ms & Akku in \% \\
+    \midrule
+    Smartphone A & 120.5  & 87.5 \\
+    Smartphone B & 98.25  & 9.0 \\
+    Tablet C     & 240    & 54.3 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Messwerte, noch ohne \texttt{siunitx}}
+\end{table}
+
+\section*{Randausgleich}
+Dieser Absatz dient als Testtext für \texttt{microtype}. Laden Sie das Paket in
+der Präambel und vergleichen Sie den rechten Rand und die Anzahl der
+Trennungen. Der Unterschied ist klein, summiert sich bei langen Dokumenten
+wie einer Bachelorarbeit aber deutlich.
+
+\end{document}

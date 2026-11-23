@@ -1,0 +1,74 @@
+% ============================================================
+%  A6 - Großes Projekt (Startdatei)
+%  Kompilieren: zweimal pdflatex main.tex
+%  Ausgangslage: Alles steht in einer Datei, Verweise sind von
+%  Hand ausgeschrieben, Abkürzungen ebenfalls.
+%  Aufgaben laut README:
+%    1. Kapitel in eigene Dateien im Ordner kapitel/ auslagern
+%    2. Verweise auf cleveref umstellen
+%    3. Abkürzungsverzeichnis mit glossaries
+%    4. Randnotizen mit todonotes
+% ============================================================
+\documentclass[a4paper,11pt]{report}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\title{Projektbericht}
+\author{Max Mustermann}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+% ---------------- Kapitel 1 ----------------
+\chapter{Einleitung}
+\label{ch:einleitung}
+
+Dieses Dokument zeigt, wie ein größeres \LaTeX-Projekt aufgebaut wird.
+Die Grundlagen folgen in Kapitel~\ref{ch:grundlagen}, das Fazit in Kapitel~\ref{ch:fazit}.
+
+% TODO: Motivation ergänzen
+Bei jedem Push wird das Dokument per Continuous Integration (CI) neu gebaut.
+Das Ergebnis ist eine PDF-Datei.
+
+% ---------------- Kapitel 2 ----------------
+\chapter{Grundlagen}
+\label{ch:grundlagen}
+
+\section{Verweise}
+\label{sec:verweise}
+
+Tabelle~\ref{tab:befehle} fasst die wichtigsten Befehle zusammen.
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{lp{7.5cm}}
+    \toprule
+    Befehl & Wirkung \\
+    \midrule
+    \verb|\input{datei}|   & fügt die Datei an dieser Stelle ein \\
+    \verb|\include{datei}| & wie \verb|\input|, zusätzlich neue Seite und eigene \texttt{.aux}-Datei \\
+    \verb|\includeonly{...}| & übersetzt nur die genannten Dateien \\
+    \bottomrule
+  \end{tabular}
+  \caption{Befehle zum Aufteilen eines Dokuments}
+  \label{tab:befehle}
+\end{table}
+
+\section{Abkürzungen}
+
+CI und Continuous Delivery (CD) werden in diesem Bericht häufig verwendet.
+
+% ---------------- Kapitel 3 ----------------
+\chapter{Fazit}
+\label{ch:fazit}
+
+Wie in Abschnitt~\ref{sec:verweise} gezeigt, müssen Verweise bisher von Hand
+mit dem passenden Wort versehen werden.
+
+\end{document}

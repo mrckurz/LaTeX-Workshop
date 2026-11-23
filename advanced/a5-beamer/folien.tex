@@ -1,0 +1,50 @@
+% ============================================================
+%  A5 - Präsentation mit Beamer (Startdatei)
+%  Kompilieren: pdflatex folien.tex
+%  Die Datei verwendet zunächst das Standard-Theme von Beamer.
+%  Aufgaben laut README:
+%    1. Folien um Overlays (\pause, <1->, \only) erweitern
+%    2. Eigenes Theme beamerthemeFH.sty anlegen
+%    3. Unten \usetheme{FH} einkommentieren
+% ============================================================
+\documentclass[aspectratio=169,11pt]{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+% \usetheme{FH}              % lädt beamerthemeFH.sty (Schritt 3)
+
+\title{\LaTeX{} Advanced}
+\subtitle{Präsentationen mit Beamer}
+\author{Max Mustermann}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}{Schrittweiser Aufbau}
+  % TODO: zwischen den Punkten \pause einfügen
+  \begin{itemize}
+    \item Eine Folie ist eine \texttt{frame}-Umgebung.
+    \item \texttt{\textbackslash pause} teilt die Folie in Schritte.
+    \item Aus einer Folie werden so mehrere PDF-Seiten.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Overlays gezielt steuern}
+  % TODO: \item<1->, \item<2->, \item<3> verwenden und \only<...>{...} ergänzen
+  \begin{itemize}
+    \item Dieser Punkt ist ab Schritt 1 sichtbar.
+    \item Dieser Punkt ist ab Schritt 2 sichtbar.
+    \item Dieser Punkt ist nur in Schritt 3 sichtbar.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Blöcke und Spalten}
+  % TODO: zwei Spalten mit columns/column, links ein block, rechts eine Formel
+  Blöcke heben Inhalte hervor.
+\end{frame}
+
+\end{document}

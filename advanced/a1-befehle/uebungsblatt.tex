@@ -1,0 +1,63 @@
+% ============================================================
+%  A1 - Befehle mit Logik (Startdatei)
+%  Kompilieren: pdflatex uebungsblatt.tex
+%  Die Datei lässt sich von Anfang an kompilieren. Arbeiten Sie
+%  die Schritte der Reihe nach ab und entfernen Sie jeweils die
+%  Kommentarzeichen (%) vor den passenden Testzeilen im Dokument.
+% ============================================================
+\documentclass[a4paper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{pgffor}          % stellt \foreach bereit (Schleifen)
+
+% ------------------------------------------------------------
+% Schritt 1: Befehl \fh mit Sternvariante
+%   \fh  -> FH Oberösterreich
+%   \fh* -> University of Applied Sciences Upper Austria
+% TODO: \NewDocumentCommand{\fh}{s}{ ... \IfBooleanTF{#1}{...}{...} }
+% ------------------------------------------------------------
+
+
+% ------------------------------------------------------------
+% Schritt 2: Zwei Zähler anlegen: aufgabe und punkte
+% TODO: \newcounter{...}
+% ------------------------------------------------------------
+
+
+% ------------------------------------------------------------
+% Schritt 3: \aufgabe[Punkte]{Titel}
+% TODO: \NewDocumentCommand{\aufgabe}{O{0} m}{ ... }
+% ------------------------------------------------------------
+
+
+% ------------------------------------------------------------
+% Schritt 4: \antwortzeilen{n} zeichnet n Schreiblinien
+% TODO: \NewDocumentCommand{\antwortzeilen}{m}{ \foreach ... }
+% ------------------------------------------------------------
+
+
+\begin{document}
+
+\section*{Übungsblatt}
+
+% --- Test zu Schritt 1 ---
+% Erstellt an der \fh{} (englisch: \fh*).
+
+% --- Test zu Schritt 2 und 3 ---
+% \aufgabe[3]{Dokumentklassen}
+Nennen Sie drei Standardklassen von \LaTeX.
+% \antwortzeilen{3}          % Test zu Schritt 4
+
+% \aufgabe[1]{Kompilieren}
+Welches Programm erzeugt aus einer \texttt{.tex}-Datei ein PDF?
+% \antwortzeilen{1}
+
+% \aufgabe{Feedback}
+Was hat Ihnen am Workshop gefallen? (Ohne Punkte)
+% \antwortzeilen{2}
+
+% --- Test zur Punktesumme ---
+% \bigskip
+% \noindent\textbf{Erreichbare Punkte: \thepunkte}
+
+\end{document}
