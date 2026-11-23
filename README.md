@@ -140,7 +140,7 @@ Hier ein Zitat: \cite{lamport1994}.
 }
 ```
 
-💡 **Tipp:** Kompiliere mit `biber`, nicht mit `bibtex`, um das Literaturverzeichnis korrekt zu erzeugen.
+💡 **Tipp:** Kompilieren Sie mit `biber`, nicht mit `bibtex`, um das Literaturverzeichnis korrekt zu erzeugen. Lokal sind die Durchläufe `pdflatex` → `biber` → `pdflatex` nötig. Overleaf und `latexmk` erledigen das automatisch.
 
 ---
 
@@ -211,7 +211,7 @@ Breite & 5.0 & 5.1 \\
 Höhe & 2.1 & 2.0 \\
 \bottomrule
 \end{tabular}
-\caption{Mehrzeilige Tabelle mit `multirow` und `booktabs`}
+\caption{Mehrzeilige Tabelle mit \texttt{multirow} und \texttt{booktabs}}
 \end{table}
 
 \end{document}
@@ -247,6 +247,7 @@ Volumen einer Kugel & $V = \frac{4}{3}\pi r^3$ & $523.6$ \\
 ### 🔧 Bonusaufgabe 5 — Eigene Umgebung und Befehlsdefinition
 ```latex
 \documentclass{article}
+\usepackage{amsmath} % stellt \boldsymbol bereit
 \usepackage{amsthm} % für theorem-ähnliche Umgebungen
 \usepackage{xcolor} % für farbige Boxen (optional)
 
@@ -293,4 +294,4 @@ Dann gilt:
 
 ## 📄 Lizenz
 Dieses Material steht unter CC BY-SA 4.0.  
-Erstellt von **Marc Kurz** (2025).
+Erstellt von **Marc Kurz** (2025–2026).
